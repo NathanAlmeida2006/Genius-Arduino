@@ -1,0 +1,28 @@
+sequenceDiagram
+    participant Jogador
+    participant Arduino
+
+    Jogador->>Arduino: Pressiona botão para ligar o jogo
+    Arduino->>Arduino: Inicializa LCD e hardware
+    Arduino->>Jogador: Exibe "Genius Game" no LCD
+    Arduino->>Jogador: Exibe "Nova rodada!" no LCD
+    Arduino->>Arduino: Gera nova sequência
+    Arduino->>Jogador: Mostra sequência (acende e apaga LEDs)
+    
+    loop Até que toda a sequência seja inserida corretamente
+        Jogador->>Arduino: Pressiona botão
+        Arduino->>Arduino: Verifica botão pressionado
+        alt Botão correto
+            Arduino->>Jogador: Acende LED correspondente
+            Arduino->>Jogador: Apaga LED correspondente
+        else Botão incorreto
+            Arduino->>Jogador: Exibe "Game Over!" no LCD
+            Arduino->>Jogador: Toca som de falha
+            Arduino->>Arduino: Limpa sequência
+            Arduino->>Jogador: Reinicia jogo
+        end
+    end
+    
+    Arduino->>Jogador: Exibe "Correto!" no LCD
+    Arduino->>Jogador: Toca som de sucesso
+    Arduino->>Jogador: Aguarda nova rodada
