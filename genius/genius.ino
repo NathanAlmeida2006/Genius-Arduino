@@ -7,6 +7,7 @@
 const int leds[NUM_LEDS] = {13, 12, 11, 10};
 const int botoes[NUM_BOTOES] = {9, 8, 7, 6};
 const int buzzer = A0;
+const int potPin = A1; 
 
 // Frequências dos tons para cada botão/LED
 const int tones[NUM_LEDS] = {261, 329, 392, 523};  // C4, E4, G4, C5
@@ -69,6 +70,7 @@ public:
 
 DynamicArray sequence;  // Sequência do jogo usando DynamicArray
 int inputIndex = 0;  // Índice da entrada do jogador
+int score = 0;  // Pontuação do jogador
 
 void setup() {
   // Configurar os LEDs como saída
@@ -83,6 +85,9 @@ void setup() {
   
   // Configurar o buzzer como saída
   pinMode(buzzer, OUTPUT);
+
+  // Configurar o pino do potenciômetro como entrada
+  pinMode(potPin, INPUT);
 
   // Inicializar o display LCD
   lcd.begin(16, 2);
@@ -106,10 +111,11 @@ void loop() {
   
   // Mostrar a sequência para o jogador
   for (int i = 0; i < sequence.size(); i++) {
+    int delayTime = map(analogRead(potPin), 0, 1023, 100, 1000);  // Ajusta o tempo de atraso com base no potenciômetro
     acendeLed(sequence[i]);
-    delay(500);
+    delay(delayTime);
     apagaLed(sequence[i]);
-    delay(250);
+    delay(delayTime / 2);
   }
 
   // Esperar a entrada do jogador
@@ -129,13 +135,18 @@ void loop() {
         delay(1000);
         lcd.clear();
         sequence.clear();  // Limpar a sequência
+        score = 0;  // Resetar a pontuação
         return;
       }
     }
   }
   
+  score++;  // Incrementar a pontuação
   lcd.setCursor(0, 0);
   lcd.print("Correto!");
+  lcd.setCursor(0, 1);
+  lcd.print("Score: ");
+  lcd.print(score);
   playSuccessTone();
   delay(1000);
   lcd.clear();
@@ -179,3 +190,4 @@ void playFailureTone() {
     delay(150);
   }
 }
+
