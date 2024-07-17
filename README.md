@@ -11,6 +11,7 @@ Este projeto implementa um jogo Genius utilizando um Arduino, LEDs, botões, um 
 - 4 x resistores de 10kΩ para os botões (pull-up)
 - 1 x buzzer
 - 1 x display LCD I2C (16x2)
+- 1 x potenciômetro
 - Jumpers e protoboard
 
 ## Circuito
@@ -20,6 +21,7 @@ Monte o circuito conforme descrito abaixo:
 - Conecte os LEDs nos pinos 13, 12, 11 e 10 do Arduino, cada um com um resistor de 220Ω.
 - Conecte os botões nos pinos 9, 8, 7 e 6 do Arduino, com resistores de 10kΩ conectados entre os pinos dos botões e o GND (configuração pull-up).
 - Conecte o buzzer ao pino A0 do Arduino.
+- Conecte o potenciômetro ao pino A1 do Arduino.
 - Conecte o display LCD I2C ao barramento I2C do Arduino (SDA e SCL).
 
 ## Como Jogar
@@ -29,13 +31,15 @@ Monte o circuito conforme descrito abaixo:
 3. **Sequência**: Uma nova cor é adicionada à sequência e é mostrada aos jogadores.
 4. **Entrada do Jogador**: O jogador deve repetir a sequência pressionando os botões corretos.
 5. **Verificação**: Se o jogador acertar a sequência, o LCD mostrará "Correto!" e tocará um tom de sucesso. Se o jogador errar, o LCD mostrará "Game Over!" e tocará um tom de falha.
-6. **Reinício**: Após uma falha, o jogo reiniciará.
+6. **Potenciômetro**: O jogador pode regular a velocidade dos leds com o potenciomêtro
+7. **Reinício**: Após uma falha, o jogo reiniciará.
+
 
 ## Visualização do projeto
 
 Link para o projeto: [https://wokwi.com/projects/402703125380563969]
 
-![image](https://github.com/user-attachments/assets/095071b0-4536-4702-a5f4-a6bd5fbed1ac)
+![alt text](imageCircuito.png)
 
 ## Contato:
 
